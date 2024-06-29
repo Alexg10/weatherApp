@@ -1,9 +1,10 @@
 // services/geocode.js
 
-const API_KEY = "AIzaSyDU1tyAM5YEhM24b0T4kqLW5sWpdn51Frk"; // Remplacez par votre clé API Google Maps
+import { useGoogleApiKey } from "@/composables/useGoogleApiKey";
 
 export async function getCoordinates(cityName) {
   try {
+    const API_KEY = useGoogleApiKey();
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
         cityName

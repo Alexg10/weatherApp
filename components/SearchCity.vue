@@ -13,11 +13,13 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import { Loader } from "@googlemaps/js-api-loader";
+import { useGoogleApiKey } from "@/composables/useGoogleApiKey";
 
 const autocompleteInput = ref(null);
 const localCityName = ref("");
+const API_KEY = useGoogleApiKey();
 
-const API_KEY = "AIzaSyDU1tyAM5YEhM24b0T4kqLW5sWpdn51Frk";
+console.log(API_KEY);
 
 defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);

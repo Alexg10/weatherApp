@@ -1,4 +1,7 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import dotenv from "dotenv";
+
+dotenv.config();
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
@@ -38,9 +41,6 @@ export default defineNuxtConfig({
   css: ["~/assets/scss/tailwind.scss"],
   runtimeConfig: {
     public: {
-      // Public runtime config (accessible both client and server-side)
-    },
-    private: {
       googleApiKey: process.env.GOOGLE_API_KEY,
     },
   },

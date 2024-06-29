@@ -70,8 +70,6 @@ onMounted(async () => {
     const hourlyData = response.hourly();
     const dailyData = response.daily();
 
-    console.log(dailyData.variables(2).valuesArray());
-
     // Mettre à jour weatherData avec les données reçues
     weatherData.value = {
       current: {
@@ -102,8 +100,6 @@ onMounted(async () => {
         uvIndexMax: dailyData.variables(5).valuesArray(),
       },
     };
-
-    // console.log(weatherData.value.daily.weatherCode);
   } catch (error) {
     console.error("Error fetching weather:", error);
   }
