@@ -24,16 +24,12 @@ export default defineNuxtConfig({
       appear: true,
     },
   },
-  modules: [
-    [
-      "@nuxtjs/google-fonts",
-      {
-        families: { Poppins: [200, 300, 400, 500, 600] },
-      },
-    ],
-    "@nuxtjs/tailwindcss",
-    "@nuxt/icon",
-  ],
+  modules: [[
+    "@nuxtjs/google-fonts",
+    {
+      families: { Poppins: [200, 300, 400, 500, 600] },
+    },
+  ], "@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/eslint"],
   tailwindcss: {
     configPath: "tailwind.config.js",
     cssPath: "~/assets/scss/tailwind.scss",
