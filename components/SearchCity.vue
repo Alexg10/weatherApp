@@ -7,7 +7,6 @@
       placeholder="Enter a city"
       class="border-b w-full active:border-black text-xl"
     />
-    test
   </div>
 </template>
 
