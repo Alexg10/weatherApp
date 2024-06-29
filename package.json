@@ -2,12 +2,18 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --fix"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prepare": "husky",
+    "lint": "eslint . --ext .js,.ts,.vue",
+    "lintfix": "eslint . --ext .js,.ts,.vue --fix"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.6",
@@ -22,6 +28,8 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "npm:@nuxtjs/tailwindcss@nightly",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "sass": "^1.77.6"
   }
 }

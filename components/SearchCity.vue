@@ -2,11 +2,11 @@
   <div>
     <input
       ref="autocompleteInput"
-      type="text"
       v-model="localCityName"
+      type="text"
       placeholder="Enter a city"
       class="border-b w-full active:border-black text-xl"
-    />
+    >
   </div>
 </template>
 
@@ -18,8 +18,6 @@ import { useGoogleApiKey } from "@/composables/useGoogleApiKey";
 const autocompleteInput = ref(null);
 const localCityName = ref("");
 const API_KEY = useGoogleApiKey();
-
-console.log(API_KEY);
 
 defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
