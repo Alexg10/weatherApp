@@ -11,6 +11,9 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      fontSize: {
+        "7xl": ["4.5rem", { lineHeight: "1.5" }],
+      },
       colors: {
         grey: "#edf0f2",
       },

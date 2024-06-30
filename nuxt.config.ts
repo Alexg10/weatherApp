@@ -24,17 +24,30 @@ export default defineNuxtConfig({
       appear: true,
     },
   },
-  modules: [[
-    "@nuxtjs/google-fonts",
-    {
-      families: { Poppins: [200, 300, 400, 500, 600] },
-    },
-  ], "@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/eslint"],
+  modules: [
+    [
+      "@nuxtjs/google-fonts",
+      {
+        families: { Poppins: [200, 300, 400, 500, 600] },
+      },
+    ],
+    "@nuxtjs/tailwindcss",
+    "@nuxt/icon",
+    "@nuxt/eslint",
+    "@nuxtjs/strapi",
+  ],
   tailwindcss: {
     configPath: "tailwind.config.js",
     cssPath: "~/assets/scss/tailwind.scss",
   },
   css: ["~/assets/scss/tailwind.scss"],
+  strapi: {
+    prefix: "/api",
+    url: "http://localhost:1337",
+    admin: "/admin",
+    cookie: {},
+    cookieName: "strapi_jwt",
+  },
   runtimeConfig: {
     public: {
       googleApiKey: process.env.GOOGLE_API_KEY,

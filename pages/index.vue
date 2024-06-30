@@ -1,10 +1,18 @@
 <template>
-  <Grid class="h-screen">
-    <div class="col-span-full h-full flex flex-col justify-center gap-4">
+  <Grid class="h-screen py-10">
+    <div
+      class="col-span-full h-full flex flex-col justify-center gap-4 relative"
+    >
+      <div class="text-sm absolute top-0 right-0">
+        <NuxtLink to="/login">
+          <Icon name="mdi-light:login" color="black" />
+          Log in
+        </NuxtLink>
+      </div>
       <div class="text-4xl md:text-5xl lg:text-7xl">Weather app</div>
       <form
-        @submit.prevent="handleSubmit"
         class="relative w-full md:w-2/3 lg:w-1/2"
+        @submit.prevent="handleSubmit"
       >
         <SearchCity v-model="cityName" />
         <button
@@ -19,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import SearchCity from "@/components/SearchCity.vue";
 

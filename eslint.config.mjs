@@ -6,7 +6,7 @@ export default withNuxt(
   {
     rules: {
       "no-unused-vars": ["error", { args: "after-used" }],
-      "no-console": "error",
+      "no-console": ["error", { allow: ["warn", "error"] }],
       "vue/multi-word-component-names": "off",
     },
   }
