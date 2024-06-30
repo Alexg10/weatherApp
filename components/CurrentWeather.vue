@@ -2,21 +2,29 @@
   <div class="col-span-full mb-5">
     <div class="flex justify-between text-sm relative">
       <div class="capitalize text-6xl">{{ cityName.split("_").join(" ") }}</div>
-      <div class="flex gap-2 items-center absolute right-0 -top-11 lg:top-0">
-        <Icon
-          :name="getWeatherIcon(weatherData.current.weatherCode)"
-          color="black"
-        />
-        <div class="w-4 h-[1px] bg-black"></div>
 
-        {{ weatherDescription }}
+      <div class="flex gap-2 items-center">
+        <div
+          class="flex gap-2 items-center absolute lg:relative right-0 -top-11 lg:top-0"
+        >
+          <Icon
+            :name="getWeatherIcon(weatherData.current.weatherCode)"
+            color="black"
+          />
+          <div class="w-4 h-[1px] bg-black"/>
+
+          {{ weatherDescription }}
+        </div>
+        <div class="scale-75">
+          <Icon name="iconoir:heart" color="black" />
+        </div>
       </div>
     </div>
   </div>
   <div class="col-span-full mb-10">
     <div class="flex text-base items-center gap-2">
       <div class="capitalize">{{ getCurrentDay() }}</div>
-      <div class="w-4 h-[1px] bg-black"></div>
+      <div class="w-4 h-[1px] bg-black"/>
       <div class="">{{ getCurrentDayNum() }} {{ getCurrentMonth() }}</div>
     </div>
   </div>
@@ -29,7 +37,7 @@
         <div class="">
           {{ weatherData.daily.temperature2mMin[0].toFixed(0) }}°C
         </div>
-        <div class="w-4 h-[1px] bg-black"></div>
+        <div class="w-4 h-[1px] bg-black"/>
         <div class="">
           {{ weatherData.daily.temperature2mMax[0].toFixed(0) }}°C
         </div>
@@ -52,6 +60,7 @@
           />
           <div class="flex text-sm">{{ data.toFixed(0) }}°C</div>
         </div>
+        {{ next12HoursPrecipitationProbability()[index].toFixed(0) }}%
       </li>
     </ul>
   </div>
@@ -67,7 +76,7 @@
     </div>
     <div class="col-span-2 border-b border-grey p-6">
       <div class="text-xl mb-2">Humidity</div>
-      <div class="text-4xl" v-if="weatherData.current.relativeHumidity2m">
+      <div v-if="weatherData.current.relativeHumidity2m" class="text-4xl">
         {{ weatherData.current.relativeHumidity2m }}%
       </div>
     </div>
@@ -116,7 +125,16 @@ import { ref, onMounted } from "vue";
 import { getWeatherInterpretation } from "~/services/weatherInterpretation";
 import { getWeatherIcon } from "~/services/weatherIcon";
 
-const props = defineProps(["cityName", "weatherData"]);
+const props = defineProps({
+  cityName: {
+    type: String,
+    required: true,
+  },
+  weatherData: {
+    type: Object,
+    required: true,
+  },
+});
 
 const weatherDescription = ref(null);
 
@@ -130,12 +148,6 @@ function next12HoursWeatherCode() {
   return props.weatherData.hourly.weatherCode.slice(0, 12);
 }
 
-// function getCurrentHour() {
-//   return new Date().toLocaleTimeString("fr-FR", {
-//     hour: "numeric",
-//   });
-// }
-
 function getCurrentHour() {
   const date = new Date();
   const hours = String(date.getHours()).padStart(2, "0"); // Formater l'heure avec deux chiffres
@@ -143,7 +155,7 @@ function getCurrentHour() {
 }
 
 function computeHourWithIndex(index) {
-  const currentHour = this.getCurrentHour();
+  const currentHour = getCurrentHour();
   const hourNumber = parseInt(currentHour, 10);
   if (hourNumber + index >= 24) {
     return hourNumber + index - 24;
@@ -185,7 +197,6 @@ function getNext7Days() {
 const days = getNext7Days();
 
 onMounted(() => {
-  console.log(props.weatherData);
   if (props.weatherData) {
     weatherDescription.value = getWeatherInterpretation(
       props.weatherData.current.weatherCode

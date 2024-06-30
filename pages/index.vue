@@ -3,11 +3,14 @@
     <div
       class="col-span-full h-full flex flex-col justify-center gap-4 relative"
     >
-      <div class="text-sm absolute top-0 right-0">
-        <NuxtLink to="/login">
-          <Icon name="mdi-light:login" color="black" />
-          Log in
-        </NuxtLink>
+      <div class="text-sm absolute top-0 right-0 flex gap-4 items-center">
+        <NuxtLink to="/create-account"> Create an account </NuxtLink>
+        <div class="w-4 h-[1px] bg-black"/>
+
+        <NuxtLink to="/login"> Log in </NuxtLink>
+      </div>
+      <div v-if="user" class="text-xl">
+        <div class="">Welcome {{ user.username }}</div>
       </div>
       <div class="text-4xl md:text-5xl lg:text-7xl">Weather app</div>
       <form
@@ -33,6 +36,7 @@ import SearchCity from "@/components/SearchCity.vue";
 
 const router = useRouter();
 const cityName = ref("");
+const user = useStrapiUser();
 
 const handleSubmit = () => {
   const citySlug = cityName.value.replace(/\s+/g, "_");

@@ -6,20 +6,29 @@
       <div class="absolute top-0 left-0">
         <BackHome />
       </div>
-      <div class="login-container relative w-full md:w-2/3 lg:w-1/2">
+      <div class="login-container relative">
         <div class="login-form">
           <div class="login-header">
-            <h1 class="text-4xl md:text-5xl lg:text-7xl">Login</h1>
+            <h1 class="text-4xl md:text-5xl lg:text-7xl">Create an account</h1>
           </div>
-          <form @submit.prevent="onSubmit">
+          <form class="w-full md:w-2/3 lg:w-1/2" @submit.prevent="onSubmit">
             <div class="login-body flex gap-2 flex-col">
+              <div class="login-input">
+                <input
+                  v-model="user.username"
+                  type="text"
+                  placeholder="Username"
+                  class="border-b w-full"
+                  @keyup.enter="login"
+                >
+              </div>
               <div class="login-input">
                 <input
                   v-model="user.email"
                   type="mail"
-                  placeholder="Username"
+                  placeholder="Mail"
                   class="border-b w-full"
-                  @keyup.enter="login"
+                  @keyup.enter="email"
                 >
               </div>
               <div class="login-input">
@@ -48,21 +57,26 @@
 </template>
 
 <script setup>
-const { login } = useStrapiAuth();
+const { register } = useStrapiAuth();
 const router = useRouter();
 
 const user = reactive({
-  xf: "",
+  username: "",
+  email: "",
   password: "",
 });
 
 const onSubmit = async () => {
   try {
-    await login({ identifier: user.email, password: user.password });
+    await register({
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    });
 
     router.push("/");
   } catch (e) {
-    console.error("Erreur lors de la connexion :", e);
+    console.error("Erreur lors de l'enregistrement :", e);
   }
 };
 </script>

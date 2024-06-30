@@ -1,15 +1,12 @@
 <template>
   <Grid class="py-4 overflow-hidden">
     <div class="col-span-full flex justify-start items-center gap-2 mb-4">
-      <NuxtLink to="/" class="flex items-center gap-2">
-        <Icon name="mdi-light:arrow-left" color="black" />
-        Back to home
-      </NuxtLink>
+      <BackHome />
     </div>
     <CurrentWeather
       v-if="weatherData"
-      :cityName="cityName"
-      :weatherData="weatherData"
+      :city-name="cityName"
+      :weather-data="weatherData"
     />
   </Grid>
 </template>
@@ -65,8 +62,6 @@ onMounted(async () => {
     const responses = await fetchWeatherApi(url, params);
 
     const response = responses[0];
-    const utcOffsetSeconds = response.utcOffsetSeconds();
-    const timezone = response.timezone();
     const hourlyData = response.hourly();
     const dailyData = response.daily();
 

@@ -12,7 +12,8 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
       },
       fontSize: {
-        "7xl": ["4.5rem", { lineHeight: "1.5" }],
+        "5xl": ["2.5rem", { lineHeight: "1.6" }],
+        "7xl": ["4.5rem", { lineHeight: "1.6" }],
       },
       colors: {
         grey: "#edf0f2",
