@@ -16,7 +16,14 @@
           {{ weatherDescription }}
         </div>
         <div class="scale-75" @click="toggleFavorite">
-          <Icon name="iconoir:heart" color="black" />
+          <Icon
+            :name="
+              favoriteCities.includes(props.cityName)
+                ? 'iconoir:heart-solid'
+                : 'iconoir:heart'
+            "
+            color="black"
+          />
         </div>
       </div>
     </div>
@@ -139,16 +146,19 @@ const props = defineProps({
 const weatherDescription = ref(null);
 const user = useStrapiUser();
 const { update } = useStrapi();
+const favoriteCities = user.value.favoriteCities || [];
 
 async function toggleFavorite() {
-  const updatedFavorites = user.value.favoriteCities || [];
-  if (!updatedFavorites.includes(props.cityName)) {
-    updatedFavorites.push(props.cityName);
+  const isAlreadyFavorite = favoriteCities.includes(props.cityName);
+  if (isAlreadyFavorite) {
+    favoriteCities.splice(favoriteCities.indexOf(props.cityName), 1);
+  } else {
+    favoriteCities.push(props.cityName);
   }
 
   try {
     await update("user/me", {
-      favoriteCities: updatedFavorites,
+      favoriteCities: favoriteCities,
       hasDog: true,
     });
   } catch (error) {
