@@ -16,37 +16,13 @@
         </div>
       </div>
       <div class="text-4xl md:text-5xl lg:text-7xl">Weather app</div>
-      <form
-        class="relative w-full md:w-2/3 lg:w-1/2"
-        @submit.prevent="handleSubmit"
-      >
-        <SearchCity v-model="cityName" />
-        <button
-          type="submit"
-          class="flex gap-2 items-center absolute right-0 top-0"
-        >
-          <Icon name="mdi-light:magnify" color="black" />
-        </button>
-      </form>
+      <CitySearch />
     </div>
   </Grid>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import SearchCity from "@/components/SearchCity.vue";
+import CitySearch from "@/components/CitySearch.vue";
 
-const router = useRouter();
-const cityName = ref("");
 const user = useStrapiUser();
-
-const handleSubmit = () => {
-  const citySlug = cityName.value.replace(/\s+/g, "_");
-  if (citySlug) {
-    router.push(`/city/${citySlug}`);
-  } else {
-    console.error("City name is empty!");
-  }
-};
 </script>
