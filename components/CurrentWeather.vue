@@ -11,11 +11,11 @@
             :name="getWeatherIcon(weatherData.current.weatherCode)"
             color="black"
           />
-          <div class="w-4 h-[1px] bg-black"/>
+          <div class="w-4 h-[1px] bg-black" />
 
           {{ weatherDescription }}
         </div>
-        <div class="scale-75">
+        <div class="scale-75" @click="toggleFavorite">
           <Icon name="iconoir:heart" color="black" />
         </div>
       </div>
@@ -24,7 +24,7 @@
   <div class="col-span-full mb-10">
     <div class="flex text-base items-center gap-2">
       <div class="capitalize">{{ getCurrentDay() }}</div>
-      <div class="w-4 h-[1px] bg-black"/>
+      <div class="w-4 h-[1px] bg-black" />
       <div class="">{{ getCurrentDayNum() }} {{ getCurrentMonth() }}</div>
     </div>
   </div>
@@ -37,7 +37,7 @@
         <div class="">
           {{ weatherData.daily.temperature2mMin[0].toFixed(0) }}°C
         </div>
-        <div class="w-4 h-[1px] bg-black"/>
+        <div class="w-4 h-[1px] bg-black" />
         <div class="">
           {{ weatherData.daily.temperature2mMax[0].toFixed(0) }}°C
         </div>
@@ -137,6 +137,24 @@ const props = defineProps({
 });
 
 const weatherDescription = ref(null);
+const user = useStrapiUser();
+const { update } = useStrapi();
+
+async function toggleFavorite() {
+  const updatedFavorites = user.value.favoriteCities || [];
+  if (!updatedFavorites.includes(props.cityName)) {
+    updatedFavorites.push(props.cityName);
+  }
+
+  try {
+    await update("user/me", {
+      favoriteCities: updatedFavorites,
+      hasDog: true,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 
 function next12HoursTemperature2m() {
   return props.weatherData.hourly.temperature2m.slice(0, 12);
