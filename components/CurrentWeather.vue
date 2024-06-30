@@ -10,6 +10,7 @@
           <Icon
             :name="getWeatherIcon(weatherData.current.weatherCode)"
             color="black"
+            class="scale-125"
           />
           <div class="w-4 h-[1px] bg-black" />
 
