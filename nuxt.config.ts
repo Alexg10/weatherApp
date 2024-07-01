@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/eslint",
     "@nuxtjs/strapi",
+    "nuxt-vue3-google-signin",
   ],
   tailwindcss: {
     configPath: "tailwind.config.js",
@@ -47,6 +48,9 @@ export default defineNuxtConfig({
     admin: "/admin",
     cookie: {},
     cookieName: "strapi_jwt",
+  },
+  googleSignIn: {
+    clientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
   },
   runtimeConfig: {
     public: {

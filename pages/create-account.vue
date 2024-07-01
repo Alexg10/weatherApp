@@ -45,11 +45,15 @@
                   class="bg-black text-white px-3 py-2 min-w-[120px] border border-black hover:bg-white hover:text-black"
                   @click="login"
                 >
-                  Login
+                  Create an account
                 </button>
               </div>
             </div>
           </form>
+          <!-- <GoogleSignInButton
+            @success="handleLoginSuccess"
+            @error="handleLoginError"
+          ></GoogleSignInButton> -->
         </div>
       </div>
     </div>
@@ -57,6 +61,8 @@
 </template>
 
 <script setup>
+// import { GoogleSignInButton } from "vue3-google-signin";
+
 const { register } = useStrapiAuth();
 const router = useRouter();
 
@@ -79,4 +85,15 @@ const onSubmit = async () => {
     console.error("Erreur lors de l'enregistrement :", e);
   }
 };
+
+// const handleLoginSuccess = (response) => {
+//   // const { credential } = response;
+//   // console.error("Access Token", credential);
+//   // router.push("/");
+// };
+
+// handle an error event
+// const handleLoginError = () => {
+//   console.error("Login failed");
+// };
 </script>
