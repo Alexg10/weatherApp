@@ -11,7 +11,10 @@
           <div class="login-header">
             <h1 class="text-4xl md:text-5xl lg:text-7xl">Create an account</h1>
           </div>
-          <form class="w-full md:w-2/3 lg:w-1/2" @submit.prevent="onSubmit">
+          <form
+            class="w-full md:w-2/3 lg:w-1/2 mb-4"
+            @submit.prevent="onSubmit"
+          >
             <div class="login-body flex gap-2 flex-col">
               <div class="login-input">
                 <input
@@ -42,7 +45,7 @@
               </div>
               <div class="login-button">
                 <button
-                  class="bg-black text-white px-3 py-2 min-w-[120px] border border-black hover:bg-white hover:text-black"
+                  class="bg-black mt-4 text-white px-3 py-2 min-w-[120px] border border-black hover:bg-white hover:text-black"
                   @click="login"
                 >
                   Create an account
@@ -50,10 +53,10 @@
               </div>
             </div>
           </form>
-          <!-- <GoogleSignInButton
+          <GoogleSignInButton
             @success="handleLoginSuccess"
             @error="handleLoginError"
-          ></GoogleSignInButton> -->
+          />
         </div>
       </div>
     </div>
@@ -61,7 +64,7 @@
 </template>
 
 <script setup>
-// import { GoogleSignInButton } from "vue3-google-signin";
+import { GoogleSignInButton } from "vue3-google-signin";
 
 const { register } = useStrapiAuth();
 const router = useRouter();
@@ -85,15 +88,4 @@ const onSubmit = async () => {
     console.error("Erreur lors de l'enregistrement :", e);
   }
 };
-
-// const handleLoginSuccess = (response) => {
-//   // const { credential } = response;
-//   // console.error("Access Token", credential);
-//   // router.push("/");
-// };
-
-// handle an error event
-// const handleLoginError = () => {
-//   console.error("Login failed");
-// };
 </script>
